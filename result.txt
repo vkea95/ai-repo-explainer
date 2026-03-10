@@ -1,0 +1,108 @@
+Directory Tree:
+
+.coveragerc
+.git-blame-ignore-revs
+.gitignore
+.pre-commit-config.yaml
+.readthedocs.yaml
+AUTHORS.rst
+HISTORY.md
+LICENSE
+MANIFEST.in
+Makefile
+NOTICE
+README.md
+docs
+    .nojekyll
+    Makefile
+    _static
+        custom.css
+        requests-sidebar.png
+    _templates
+        hacks.html
+        sidebarintro.html
+        sidebarlogo.html
+    _themes
+        .gitignore
+        LICENSE
+        flask_theme_support.py
+    api.rst
+    community
+        faq.rst
+        out-there.rst
+        recommended.rst
+        release-process.rst
+        support.rst
+        updates.rst
+        vulnerabilities.rst
+    conf.py
+    dev
+        authors.rst
+        contributing.rst
+    index.rst
+    make.bat
+    requirements.txt
+    user
+        advanced.rst
+        authentication.rst
+        install.rst
+        quickstart.rst
+ext
+    LICENSE
+    flower-of-life.jpg
+    kr-compressed.png
+    kr.png
+    psf-compressed.png
+    psf.png
+    requests-logo-compressed.png
+    requests-logo.ai
+    requests-logo.png
+    requests-logo.svg
+    ss-compressed.png
+    ss.png
+pyproject.toml
+requirements-dev.txt
+setup.py
+src
+    requests
+        __init__.py
+        __version__.py
+        _internal_utils.py
+        adapters.py
+        api.py
+        auth.py
+        certs.py
+        compat.py
+        cookies.py
+        exceptions.py
+        help.py
+        hooks.py
+        models.py
+        packages.py
+        sessions.py
+        status_codes.py
+        structures.py
+        utils.py
+tests
+    __init__.py
+    certs
+        README.md
+        expired
+        mtls
+        valid
+    compat.py
+    conftest.py
+    test_adapters.py
+    test_help.py
+    test_hooks.py
+    test_lowlevel.py
+    test_packages.py
+    test_requests.py
+    test_structures.py
+    test_testserver.py
+    test_utils.py
+    testserver
+        __init__.py
+        server.py
+    utils.py
+tox.ini
