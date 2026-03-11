@@ -1,6 +1,6 @@
 # from llm_client import ask_llm
 from repo_scan import build_tree,find_entry_points
-
+from llm_client import ask_llm
 
 def build_repo_prompt(tree, entry_points):
 
@@ -25,13 +25,13 @@ Explain briefly:
     return prompt
 
 
-# def explain_repo(tree, entry_points):
+def explain_repo(tree, entry_points):
 
-#     prompt = build_repo_prompt(tree, entry_points)
+    prompt = build_repo_prompt(tree, entry_points)
 
-#     response = ask_llm(prompt)
+    response = ask_llm(prompt)
 
-#     return response
+    return response
 
 
 if __name__ == "__main__":
@@ -54,3 +54,7 @@ if __name__ == "__main__":
 
     print("\n promt:\n")
     print(promt)
+
+    explain = ask_llm(prompt=promt)
+    print("\nHere is the explaination from Gemnini\n")
+    print(explain)
