@@ -9,7 +9,13 @@ IGNORE_DIRS = {
     "build",
     "target",
     ".venv",
-    "venv"
+    "venv",
+    "docs",
+    "tests",
+    "test",
+    "assets",
+    "images",
+    "static",
 }
 
 ENTRY_FILES = {
@@ -62,7 +68,7 @@ def build_tree(root_path, max_depth=2, prefix="", current_depth=0):
 def find_entry_points(root_path):
     entry_points = []
     for root, dirs, files in os.walk(root_path):
-        # dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
+        dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
 
         for f in files:
             if f in ENTRY_FILES:
