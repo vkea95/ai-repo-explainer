@@ -33,6 +33,23 @@ ENTRY_FILES = {
     "Application.java"
 }
 
+README_FILES = {
+    "README.md",
+    "README.rst",
+    "README.txt"
+}
+
+def read_readme(root_path):
+    for name in README_FILES:
+        path = os.path.join(root_path,name)
+        if os.path.exists(path):
+            print("reading the readme file: {path}")
+            with open(path, "r", encoding="utf-8", errors="ignore") as f:
+                return f.read()[:3000]
+    print("there is no readme file inside the project")
+    return ""
+
+
 def build_tree(root_path, max_depth=2, prefix="", current_depth=0):
     if current_depth > max_depth:
         return []

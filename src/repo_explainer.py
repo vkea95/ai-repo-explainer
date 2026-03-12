@@ -1,8 +1,7 @@
-# from llm_client import ask_llm
-from repo_scan import build_tree,find_entry_points
+from repo_scan import build_tree,find_entry_points,read_readme
 from llm_client import ask_llm
 
-def build_repo_prompt(tree, entry_points):
+def build_repo_prompt(tree, entry_points, readme):
 
     prompt = f"""
 You are a senior software engineer analyzing a GitHub repository.
@@ -15,11 +14,42 @@ Entry points:
 
 {"\n".join(entry_points)}
 
-Explain briefly:
-1. What this project likely does
-2. What the main modules are
-3. Where execution probably starts
-        
+README (project documentation):
+
+{readme}
+
+Your task is to analyze the repository.
+
+Return your answer in the following format.
+
+---
+
+## Project Purpose
+Answer:
+Source: README / Structure / Inference
+
+## Main Modules
+Answer:
+Source: README / Structure / Inference
+
+## Entry Points
+Answer:
+Source: README / Structure / Inference
+
+## Reading Guide
+Answer:
+Source: README / Structure / Inference
+
+---
+
+Rules:
+
+1. Choose exactly ONE source for each section.
+2. Source must be one of: README, Structure, Inference.
+3. If the information is directly supported by README text, choose README.
+4. If the information is inferred from file names or directory structure, choose Structure.
+5. If it is a reasonable guess not directly supported by the inputs, choose Inference.
+6. Do not invent facts that are not supported by the repository information.        
         """
 
     return prompt
@@ -49,8 +79,9 @@ if __name__ == "__main__":
     entry_points = find_entry_points(repo_path)
     print("\n got entry_points:\n")
 
+    readme = read_readme(repo_path)
 
-    promt = build_repo_prompt(tree=tree, entry_points=entry_points)
+    promt = build_repo_prompt(tree=tree, entry_points=entry_points, readme=readme)
 
     print("\n promt:\n")
     print(promt)
