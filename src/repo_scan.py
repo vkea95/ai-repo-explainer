@@ -39,6 +39,70 @@ README_FILES = {
     "README.txt"
 }
 
+IMPORTANT_DIRS = {
+    "src",
+    "app",
+    "core",
+    "lib",
+    "server",
+    "client",
+}
+
+CODE_EXTENSIONS = {".py", ".js", ".ts", ".tsx", ".java", ".rs", ".go"}
+
+def find_key_files(repo_path, max_files=8):
+    key_files = []
+
+    for root, dirs, files in os.walk(repo_path):
+        dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
+        # 将绝对路径转换为repo_path下的相对路径
+        # 在对相对路径进行split，这样就可以拆分出路径名称了
+        parts = set(os.path.relpath(root, repo_path).split(os.sep))
+
+        # "."代表是否扫描repo_path路径，其子路径不会得到".""
+        if "." not in parts and not (parts & IMPORTANT_DIRS):
+            continue
+
+
+        for file in files:
+            _, ext = os.path.splitext(file)
+            if ext not in CODE_EXTENSIONS:
+                continue
+
+            full_path = os.path.join(root, file)
+            rel_path = os.path.relpath(full_path, repo_path)
+            key_files.append(repo_path)
+
+            if len(key_files) >= max_files:
+                print("return the current list of key_files, because its length is bigger than max size: {max_files}")
+                return key_files
+
+
+    return key_files
+
+
+def read_key_file_snippets(repo_path, key_files, max_lines=60):
+    snippets = []
+
+    for relpath in key_files:
+        full_path = os.path.join(repo_path, relpath)
+
+        try:
+            with open(full_path, "r", encoding="utf-8", errors="ignore") as f:
+                lines = f.readlines()[:max_lines]
+        except Exception:
+            print("failed to open the file: {full_path}")
+            continue
+
+        snippet = "".join(lines).strip()
+        if not snippet:
+            continue
+
+        snippets.append(f"FILE: {relpath}\n{snippet}\n")
+
+    return "\n\n".join(snippets)
+
+
 def read_readme(root_path):
     for name in README_FILES:
         path = os.path.join(root_path,name)
