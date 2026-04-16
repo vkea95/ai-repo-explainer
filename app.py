@@ -1,9 +1,12 @@
-import streamlit as st
+# import streamlit as st
+from training_plan import train
 
-st.title("AI Repo Explainer")
+train()
 
-repo_url = st.text_input("GitHub Repo URL")
+# st.title("AI Repo Explainer")
 
-if st.button("Analyze"):
-    st.write("Analysis will appear here.")
+# repo_url = st.text_input("GitHub Repo URL")
+
+# if st.button("Analyze"):
+#     st.write("Analysis will appear here.")
 
